@@ -8,7 +8,8 @@ module.exports = () => {
     mode: 'development',
     entry: {
       main: './src/js/index.js',
-      install: './src/js/install.js'
+      install: './src/js/install.js',
+      editor: './src/js/editor.js',
     },
     output: {
       filename: '[name].bundle.js',
@@ -17,17 +18,20 @@ module.exports = () => {
     plugins: [
       new HtmlWebpackPlugin({
         template: './index.html',
-        title: 'JATE'
+        title: 'JATE',
+        favicon: './favicon.ico',
+        inject: true,
       }),
       new InjectManifest({
         swSrc: './src-sw.js',
         swDest: 'src-sw.js',
+        exclude: [],
       }),
       new WebpackPwaManifest({
         fingerprints: false,
         inject: true,
-        name: 'text-editor',
-        short_name: 'JATE',
+        name: 'jate',
+        short_name: 'jate',
         description: 'Just Another Text Editor',
         background_color: '#225ca3',
         theme_color: '#225ca3',
